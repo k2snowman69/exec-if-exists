@@ -21,13 +21,14 @@
   "license": "MIT",
   "main": "./dist/index.js",
   "name": "exec-if-exists",
-  "repository": "github:snowcoders/renovate-config",
+  "repository": "github:k2snowman69/exec-if-exists",
   "scripts": {
     "build": "tsc",
     "clean": "rimraf dist",
     "prepare": "npm run clean && npm run build",
     "prettier": "prettier \"./src/index.ts\"",
-    "start": "npm run build && node ./dist/cli.js prettier \"./src/index.ts\""
+    "start-fail": "npm run build && node ./dist/cli.js not_prettier \"./src/index.ts\"",
+    "start-success": "npm run build && node ./dist/cli.js prettier \"./src/index.ts\""
   },
   "version": "1.0.0"
 }
