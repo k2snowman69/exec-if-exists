@@ -30,5 +30,5 @@
     "start-fail": "npm run build && node ./dist/cli.js not_prettier \"./src/index.ts\"",
     "start-success": "npm run build && node ./dist/cli.js prettier \"./src/index.ts\""
   },
-  "version": "1.0.0"
+  "version": "1.0.1"
 }
