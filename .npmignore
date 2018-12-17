@@ -1,0 +1,8 @@
+.circleci/**
+.gitignore
+.npmignore
+.vscode/**
+src/**
+tsconfig.json
+tsconfig.base.json
+.*rc.js
