@@ -1,5 +1,5 @@
-import npmWhich from "npm-which";
 import execa from "execa";
+import npmWhich from "npm-which";
 
 export class ExecIfExists {
   public static run(args: string[]) {
