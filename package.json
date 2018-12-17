@@ -1,7 +1,7 @@
 {
   "author": "k2snowman69",
   "bin": {
-    "exec-if-exists": "./bin/cli.js"
+    "exec-if-exists": "./dist/cli.js"
   },
   "dependencies": {
     "execa": "^1.0.0",
