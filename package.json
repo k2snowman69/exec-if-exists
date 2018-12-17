@@ -11,8 +11,8 @@
   "devDependencies": {
     "@snowcoders/renovate-config": "0.1.4",
     "@snowcoders/sortier": "2.3.2",
-    "@types/node": "^10.12.15",
-    "husky": "^1.2.1",
+    "@types/node": "10.12.15",
+    "husky": "1.2.1",
     "lint-staged": "8.1.0",
     "prettier": "1.15.3",
     "rimraf": "2.6.2",
