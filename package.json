@@ -13,7 +13,7 @@
     "@snowcoders/sortier": "2.5.1",
     "@types/node": "10.12.21",
     "husky": "1.3.1",
-    "lint-staged": "8.1.2",
+    "lint-staged": "8.1.3",
     "prettier": "1.16.3",
     "rimraf": "2.6.3",
     "typescript": "3.3.1"
