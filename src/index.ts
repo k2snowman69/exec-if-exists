@@ -12,10 +12,12 @@ export class ExecIfExists {
     } catch (e) {
       return;
     }
+    if (bin == null) {
+      return;
+    }
 
     execa.sync(bin, args.slice(1), {
       cwd: currentDir
     });
-    return;
   }
 }
