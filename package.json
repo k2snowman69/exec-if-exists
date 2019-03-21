@@ -10,7 +10,7 @@
   "description": "Runs a npm cli package if it exists",
   "devDependencies": {
     "@snowcoders/renovate-config": "0.2.2",
-    "@snowcoders/sortier": "2.5.1",
+    "@snowcoders/sortier": "2.5.2",
     "@types/execa": "0.9.0",
     "@types/jest": "24.0.11",
     "@types/node": "10.12.24",
