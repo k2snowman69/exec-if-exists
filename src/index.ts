@@ -1,4 +1,5 @@
 import execa from "execa";
+// @ts-ignore
 import npmWhich from "npm-which";
 
 export class ExecIfExists {
