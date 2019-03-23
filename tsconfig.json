@@ -1,9 +1,6 @@
 {
   "compilerOptions": {
     "declaration": false,
-    "noImplicitAny": false,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
     "noUnusedLocals": true,
     "outDir": "./dist/",
     "sourceMap": false

@@ -5,7 +5,7 @@ import execa from "execa";
 jest.mock("execa");
 
 describe("ExecIfExists", () => {
-  let execaSpy: jest.SpyInstance<any, unknown[]>;
+  let execaSpy: jest.SpyInstance<any, any>;
 
   beforeEach(() => {
     execaSpy = jest.spyOn(execa, "sync");
