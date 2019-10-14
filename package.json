@@ -4,7 +4,7 @@
     "exec-if-exists": "./dist/cli.js"
   },
   "dependencies": {
-    "execa": "^2.0.0",
+    "execa": "^3.0.0",
     "npm-which": "^3.0.1"
   },
   "description": "Runs a npm cli package if it exists",
