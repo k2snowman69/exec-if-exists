@@ -13,7 +13,7 @@
     "@snowcoders/sortier": "3.0.2",
     "@types/execa": "0.9.0",
     "@types/jest": "24.0.25",
-    "@types/node": "13.1.5",
+    "@types/node": "13.1.6",
     "husky": "4.0.3",
     "jest": "24.9.0",
     "lint-staged": "9.5.0",
