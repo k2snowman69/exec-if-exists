@@ -20,7 +20,7 @@
     "prettier": "1.19.1",
     "rimraf": "3.0.0",
     "ts-jest": "24.3.0",
-    "typescript": "3.7.4"
+    "typescript": "3.7.5"
   },
   "license": "MIT",
   "main": "./dist/index.js",
