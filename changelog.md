@@ -1,8 +1,12 @@
 ### Unreleased
 
+### 2.0.2
+
+- Removed tslib as a dependency
+
 ### 2.0.1
 
-Fixed wrong application being executed
+- Fixed wrong application being executed
 
 ### 2.0.0
 

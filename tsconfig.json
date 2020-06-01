@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "importHelpers": false,
     "module": "CommonJS",
     "noUnusedLocals": true,
     "outDir": "./dist/",
