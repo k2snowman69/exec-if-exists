@@ -3,11 +3,8 @@
   "bin": {
     "exec-if-exists": "./dist/cli.js"
   },
-  "dependencies": {
-    "execa": "^4.0.0",
-    "npm-which": "^3.0.1"
-  },
-  "description": "Runs a npm cli package if it exists",
+  "dependencies": {},
+  "description": "Runs a npm cli package only if it exists",
   "devDependencies": {
     "@snowcoders/renovate-config": "1.0.7",
     "@snowcoders/sortier": "3.1.2",
@@ -20,6 +17,7 @@
     "prettier": "2.0.5",
     "rimraf": "3.0.2",
     "ts-jest": "26.1.0",
+    "tslib": "2.0.0",
     "typescript": "3.9.3"
   },
   "license": "MIT",
@@ -28,9 +26,8 @@
   "repository": "github:k2snowman69/exec-if-exists",
   "scripts": {
     "build": "tsc",
-    "clean": "rimraf dist",
+    "clean": "rimraf coverage dist",
     "prepare": "npm run clean && npm run build",
-    "prettier": "prettier \"./src/index.ts\"",
     "start": "npm run build && node ./dist/cli.js",
     "test": "jest"
   },

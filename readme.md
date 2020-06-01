@@ -1,6 +1,6 @@
 # exec-if-exists
 
-Runs an npm package if it exists
+Runs an npm package if it exists. This is basically a wrapper around npx where whenever npx returns a non-zero exit, this returns a zero.
 
 # Usage
 
@@ -8,15 +8,27 @@ Runs an npm package if it exists
 exec-if-exists sortier ./src/**/*.ts
 ```
 
-# How's it work
-
-Basically we use `npm-which` to figure out what the package we're supposed to execute.
-
-If we don't find it, we exit gracefully.
-If we find it, we run it.
-
 # Why?
 
-Snowcoder's has a [shared lint-staged config](http://github.com/snowcoders/renovate-config) which we wanted an opt in system for triggering scenarios on commit. The reason for this is we didn't want to edit 15+ different lint-staged configs all at once, but just a single one in a single location and let greenkeeping tools update automatically.
+Optional dev tooling
 
-Do we expect you to be as automated as us? Of course not, but it made our lives easier so we figured we'd show it off :-)
+Let's say some projects use jest for unit testing but others optionally have puppeteer/playwright for E2E testing. Using exec-if-exists your lint-stage config basically runs both and if the tool is installed, it gets run.
+
+```
+// Example husky config
+{
+  hooks: {
+    "pre-commit": "exec-if-exists jest && exec-if-exists playwright",
+  },
+};
+```
+
+Now any time a commit is pushed, jest and playwright run if they are installed and exit with a non-zero if they fail. This allows you to create a single consistent config that all your projects inherit from. For example, our husky config looks like this:
+
+```
+var configs = require("@snowcoders/renovate-config");
+
+module.exports = configs.husky;
+```
+
+And then we host our shared husky config in a single location!

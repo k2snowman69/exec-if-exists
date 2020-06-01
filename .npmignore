@@ -1,10 +1,11 @@
 .*rc.js
-.circleci/**
+.circleci
 .gitignore
 .npmignore
-.vscode/**
-coverage/**
+.vscode
+coverage
 jest.config.js
-src/**
+src
+renovate.json
 tsconfig.base.json
 tsconfig.json
