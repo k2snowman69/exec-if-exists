@@ -1,28 +1,15 @@
-import { ExecIfExists } from "./index";
+import { execSync } from "./index";
 
-import execa from "execa";
-
-jest.mock("execa");
-
-describe("ExecIfExists", () => {
-  let execaSpy: jest.SpyInstance<any, any>;
-
-  beforeEach(() => {
-    execaSpy = jest.spyOn(execa, "sync");
+describe("execSync", () => {
+  it("execSyncs when program is found", () => {
+    expect(() => {
+      execSync(["npm", "-v"]);
+    }).not.toThrow();
   });
 
-  afterEach(() => {
-    execaSpy.mockReset();
-    execaSpy.mockRestore();
-  });
-
-  it("Runs when program is found", () => {
-    ExecIfExists.run(["prettier", '"./src/index.ts"']);
-    expect(execaSpy).toHaveBeenCalled();
-  });
-
-  it("Does not run when program is not found", () => {
-    ExecIfExists.run(["not_prettier", '"./src/index.ts"']);
-    expect(execaSpy).not.toHaveBeenCalled();
+  it("Does not execSync when program is not found", () => {
+    expect(() => {
+      execSync(["not-prettier", '"./src/index.ts"']);
+    }).not.toThrow();
   });
 });

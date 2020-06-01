@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-import { ExecIfExists } from "./index";
+import { execSync } from "./index";
 
 "use strict";
 
 let args = process.argv.slice(2);
 
-ExecIfExists.run(args);
+execSync(args);

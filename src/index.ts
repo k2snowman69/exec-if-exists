@@ -1,24 +1,15 @@
-import execa from "execa";
-// @ts-ignore
-import npmWhich from "npm-which";
+import { execSync as nodeExecSync } from "child_process";
 
-export class ExecIfExists {
-  public static run(args: string[]) {
-    let currentDir = process.cwd();
-
-    let which = npmWhich(currentDir);
-    let bin = null;
-    try {
-      bin = which.sync(args[0]);
-    } catch (e) {
-      return;
-    }
-    if (bin == null) {
-      return;
-    }
-
-    execa.sync(bin, args.slice(1), {
-      cwd: currentDir
-    });
+export function execSync(args: string[]) {
+  try {
+    const result = nodeExecSync(
+      ["npx", "--no-install", ...args.slice(1)].join(" "),
+      {
+        cwd: process.cwd(),
+      }
+    );
+    console.log(result.toString());
+  } catch (e) {
+    // Do nothing since we expect this to fail if the process cannot be found
   }
 }
