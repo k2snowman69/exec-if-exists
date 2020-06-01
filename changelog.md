@@ -1,5 +1,9 @@
 ### Unreleased
 
+### 2.0.1
+
+Fixed wrong application being executed
+
 ### 2.0.0
 
 Breaking:
