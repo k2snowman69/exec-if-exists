@@ -1,5 +1,7 @@
 ### Unreleased
 
+### 2.0.0
+
 Breaking:
 
 - Moved away from `npm-which` and now run `npx` instead
