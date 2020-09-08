@@ -1,5 +1,7 @@
 ### Unreleased
 
+### 3.0.0
+
 - Breaking
   - Renamed export execSync to execIfExists and turned it into a promise
   - Minimum node version 8.10.0
