@@ -1,26 +1,58 @@
 import * as child_process from "child_process";
-import { execSync } from "./index";
+import { mocked } from "ts-jest";
+import { execIfExists } from "./index";
 
 jest.mock("child_process");
 
-describe("execSync", () => {
-  it("Calls execSync with a successful program", () => {
-    expect(() => {
-      execSync(["npm", "-v"]);
-      expect(child_process.execSync).toBeCalledWith(
-        "npx --no-install npm -v",
-        expect.anything()
-      );
-    }).not.toThrow();
-  });
+const mockedChildProcess = mocked(child_process);
 
-  it("Calls execSync with a non-existant program", () => {
-    expect(() => {
-      execSync(["not-prettier", '"./src/index.ts"']);
-      expect(child_process.execSync).toBeCalledWith(
-        'npx --no-install not-prettier "./src/index.ts"',
-        expect.anything()
-      );
-    }).not.toThrow();
+describe("execIfExists", () => {
+  const args = ["npm", "-v"];
+  const expectedCommand = "npx --no-install npm -v";
+
+  it.each([
+    [0, undefined, "success-undefined"],
+    [0, 0, "success"],
+    [0, 127, "not found"],
+    [1, 1, "failure"],
+  ])(
+    "Returns %i when underlying status code is %i representing a %s program",
+    async (expectedCode, realCode, helpfulMessage) => {
+      mockedChildProcess.exec.mockImplementationOnce((command, b, callback) => {
+        expect(command).toBe(expectedCommand);
+        if (callback == null) {
+          throw new Error("Unexpected");
+        }
+        callback(
+          {
+            code: realCode,
+            message: "message",
+            name: "name",
+          },
+          "",
+          ""
+        );
+
+        return {} as any;
+      });
+
+      const result = await execIfExists(args);
+      expect(result).toEqual(expectedCode);
+    }
+  );
+
+  it("Returns 0 when underlying error is null", async () => {
+    mockedChildProcess.exec.mockImplementationOnce((command, b, callback) => {
+      expect(command).toBe(expectedCommand);
+      if (callback == null) {
+        throw new Error("Unexpected");
+      }
+      callback(null, "", "");
+
+      return {} as any;
+    });
+
+    const result = await execIfExists(args);
+    expect(result).toEqual(0);
   });
 });
