@@ -1,10 +1,12 @@
 {
   "compilerOptions": {
     "importHelpers": false,
+    "lib": ["ES2017"],
     "module": "CommonJS",
     "noUnusedLocals": true,
     "outDir": "./dist/",
-    "target": "ES5"
+    "removeComments": true,
+    "target": "ES2017"
   },
   "exclude": ["./src/**/*.test.ts"],
   "extends": "@snowcoders/renovate-config",

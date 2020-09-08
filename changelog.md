@@ -1,5 +1,9 @@
 ### Unreleased
 
+- Breaking
+  - Renamed export execSync to execIfExists and turned it into a promise
+  - Minimum node version 8.10.0
+
 ### 2.0.2
 
 - Removed tslib as a dependency
