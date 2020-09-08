@@ -49,7 +49,14 @@ describe("execIfExists", () => {
       }
       callback(null, "", "");
 
-      return {} as any;
+      const io = {
+        pipe: () => {},
+      };
+      return {
+        stdout: io,
+        stderr: io,
+        stdin: io,
+      } as any;
     });
 
     const result = await execIfExists(args);

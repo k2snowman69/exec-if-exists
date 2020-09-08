@@ -3,7 +3,7 @@ import { exec } from "child_process";
 export function execIfExists(args: string[]) {
   return new Promise<number>((resolve) => {
     const command = ["npx", "--no-install", ...args].join(" ");
-    exec(
+    const childProcess = exec(
       command,
       {
         cwd: process.cwd(),
@@ -19,5 +19,8 @@ export function execIfExists(args: string[]) {
         }
       }
     );
+    childProcess.stdout?.pipe(process.stdout);
+    childProcess.stderr?.pipe(process.stderr);
+    childProcess.stdin?.pipe(process.stdin);
   });
 }

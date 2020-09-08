@@ -1,5 +1,9 @@
 ### Unreleased
 
+### 3.0.1
+
+- Fixed output no longer being emitted to console
+
 ### 3.0.0
 
 - Breaking
