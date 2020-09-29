@@ -31,5 +31,5 @@
     "start": "npm run build && node ./dist/cli.js",
     "test": "jest"
   },
-  "version": "3.0.1"
+  "version": "3.0.2"
 }
