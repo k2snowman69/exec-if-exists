@@ -1,5 +1,9 @@
 ### Unreleased
 
+### 3.0.2
+
+- Fixed `TypeError: dest.end is not a function`
+
 ### 3.0.1
 
 - Fixed output no longer being emitted to console

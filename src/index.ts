@@ -21,6 +21,8 @@ export function execIfExists(args: string[]) {
     );
     childProcess.stdout?.pipe(process.stdout);
     childProcess.stderr?.pipe(process.stderr);
-    childProcess.stdin?.pipe(process.stdin);
+    if (childProcess.stdin) {
+      process.stdin.pipe(childProcess.stdin);
+    }
   });
 }
