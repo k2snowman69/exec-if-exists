@@ -7,7 +7,7 @@
   "description": "Runs a npm cli package only if it exists",
   "devDependencies": {
     "@snowcoders/renovate-config": "2.0.2",
-    "@snowcoders/sortier": "3.2.0",
+    "@snowcoders/sortier": "3.2.1",
     "@types/execa": "0.9.0",
     "@types/jest": "26.0.19",
     "@types/node": "14.14.16",
