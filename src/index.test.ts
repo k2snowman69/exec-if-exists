@@ -1,65 +1,61 @@
-import * as child_process from "child_process";
-import { mocked } from "ts-jest";
+import * as getBinDirectory from "./getBinDirectory";
+import * as programInBin from "./programInBin";
+import * as runNpx from "./runNpx";
 import { execIfExists } from "./index";
+import { mocked } from "ts-jest/utils";
 
-jest.mock("child_process");
+jest.mock("./getBinDirectory");
+const mockedGetBinDirectory = mocked(getBinDirectory);
+jest.mock("./programInBin");
+const mockedProgramInBin = mocked(programInBin);
+jest.mock("./runNpx");
+const mockedRunNpx = mocked(runNpx);
 
-const mockedChildProcess = mocked(child_process);
-
-describe("execIfExists", () => {
-  const args = ["npm", "-v"];
-  const expectedCommand = "npx --no-install npm -v";
-
-  it.each([
-    [0, undefined, "success-undefined"],
-    [0, 0, "success"],
-    [0, 127, "not found"],
-    [1, 1, "failure"],
-  ])(
-    "Returns %i when underlying status code is %i representing a %s program",
-    async (expectedCode, realCode, helpfulMessage) => {
-      mockedChildProcess.exec.mockImplementationOnce((command, b, callback) => {
-        expect(command).toBe(expectedCommand);
-        if (callback == null) {
-          throw new Error("Unexpected");
-        }
-        callback(
-          {
-            code: realCode,
-            message: "message",
-            name: "name",
-          },
-          "",
-          ""
-        );
-
-        return {} as any;
-      });
-
-      const result = await execIfExists(args);
-      expect(result).toEqual(expectedCode);
-    }
-  );
-
-  it("Returns 0 when underlying error is null", async () => {
-    mockedChildProcess.exec.mockImplementationOnce((command, b, callback) => {
-      expect(command).toBe(expectedCommand);
-      if (callback == null) {
-        throw new Error("Unexpected");
-      }
-      callback(null, "", "");
-
-      const io = {
-        pipe: () => {},
-      };
-      return {
-        stdout: io,
-        stderr: io,
-        stdin: io,
-      } as any;
-    });
-
-    const result = await execIfExists(args);
-    expect(result).toEqual(0);
+beforeEach(() => {
+  mockedGetBinDirectory.getBinDirectory.mockImplementationOnce(() => {
+    return Promise.resolve("node_modules/.bin");
   });
+  mockedProgramInBin.programInBin.mockImplementationOnce(() => {
+    return Promise.resolve(true);
+  });
+  mockedRunNpx.runNpx.mockImplementationOnce(() => {
+    return Promise.resolve(0);
+  });
+});
+
+afterEach(() => {
+  mockedGetBinDirectory.getBinDirectory.mockReset();
+  mockedProgramInBin.programInBin.mockReset();
+  mockedRunNpx.runNpx.mockReset();
+});
+
+it("Does not call mockedGetBinDirectory if arguments are passed", async () => {
+  await execIfExists([]);
+
+  await expect(mockedGetBinDirectory.getBinDirectory).not.toHaveBeenCalled();
+});
+
+it("Returns 0 if runNpx returns 0", async () => {
+  await expect(execIfExists(["sortier"])).resolves.toEqual(0);
+});
+
+it("Returns 0 if getBinDirectory fails", async () => {
+  mockedGetBinDirectory.getBinDirectory
+    .mockReset()
+    .mockImplementationOnce(() => Promise.reject("bleh"));
+  await expect(execIfExists(["sortier"])).resolves.toEqual(0);
+});
+
+it("Returns 0 if programInBin fails", async () => {
+  mockedProgramInBin.programInBin
+    .mockReset()
+    .mockImplementationOnce(() => Promise.reject("bleh"));
+  await expect(execIfExists(["sortier"])).resolves.toEqual(0);
+});
+
+it("Returns 50 if runNpx returns 50", async () => {
+  mockedRunNpx.runNpx
+    .mockReset()
+    .mockImplementationOnce(() => Promise.resolve(50));
+  await expect(execIfExists(["sortier"])).resolves.toEqual(50);
 });

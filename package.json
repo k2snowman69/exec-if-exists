@@ -3,7 +3,6 @@
   "bin": {
     "exec-if-exists": "./dist/cli.js"
   },
-  "dependencies": {},
   "description": "Runs a npm cli package only if it exists",
   "devDependencies": {
     "@snowcoders/renovate-config": "2.0.3",
@@ -28,7 +27,7 @@
     "build": "tsc",
     "clean": "rimraf coverage dist",
     "prepare": "npm run clean && npm run build",
-    "start": "npm run build && node ./dist/cli.js",
+    "start": "node ./dist/cli.js",
     "test": "jest"
   },
   "version": "3.0.2"
