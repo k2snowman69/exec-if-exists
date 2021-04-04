@@ -1,6 +1,8 @@
 ### Unreleased
 
-- Fixed picking up globally installed packages
+### 3.0.3
+
+- Fixed globally installed packages incorrectly being picked up
 
 ### 3.0.2
 
