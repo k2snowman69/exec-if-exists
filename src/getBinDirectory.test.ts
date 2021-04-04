@@ -61,6 +61,27 @@ it("Resolves when multiple package path is found", async () => {
   await expect(getBinDirectory()).resolves.toEqual(expectedBinPath);
 });
 
+it("Resolves when multiple packages found with newline at end", async () => {
+  mockedChildProcess.exec.mockImplementationOnce((command, b, callback) => {
+    expect(command).toBe(expectedCommand);
+    if (callback == null) {
+      throw new Error("Unexpected");
+    }
+    callback(null, `${mockExecIfExistsPath}\n${mockExecIfExistsPath}\n`, "");
+
+    const io = {
+      pipe: () => {},
+    };
+    return {
+      stdout: io,
+      stderr: io,
+      stdin: io,
+    } as any;
+  });
+
+  await expect(getBinDirectory()).resolves.toEqual(expectedBinPath);
+});
+
 it("Rejects when no paths are found", async () => {
   mockedChildProcess.exec.mockImplementationOnce((command, b, callback) => {
     expect(command).toBe(expectedCommand);

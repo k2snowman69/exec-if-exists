@@ -35,10 +35,6 @@ it("Does not call mockedGetBinDirectory if arguments are passed", async () => {
   await expect(mockedGetBinDirectory.getBinDirectory).not.toHaveBeenCalled();
 });
 
-it("Returns 0 if runNpx returns 0", async () => {
-  await expect(execIfExists(["sortier"])).resolves.toEqual(0);
-});
-
 it("Returns 0 if getBinDirectory fails", async () => {
   mockedGetBinDirectory.getBinDirectory
     .mockReset()
@@ -53,7 +49,18 @@ it("Returns 0 if programInBin fails", async () => {
   await expect(execIfExists(["sortier"])).resolves.toEqual(0);
 });
 
-it("Returns 50 if runNpx returns 50", async () => {
+it("Returns 0 if runNpx returns 0 (program succeeded)", async () => {
+  await expect(execIfExists(["sortier"])).resolves.toEqual(0);
+});
+
+it("Returns 0 if programInBin returns false (program not installed scenario)", async () => {
+  mockedProgramInBin.programInBin
+    .mockReset()
+    .mockImplementationOnce(() => Promise.resolve(false));
+  await expect(execIfExists(["sortier"])).resolves.toEqual(0);
+});
+
+it("Returns 50 if runNpx returns 50 (program returned an error code)", async () => {
   mockedRunNpx.runNpx
     .mockReset()
     .mockImplementationOnce(() => Promise.resolve(50));
