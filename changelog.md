@@ -1,5 +1,7 @@
 ### Unreleased
 
+- Fixed picking up globally installed packages
+
 ### 3.0.2
 
 - Fixed `TypeError: dest.end is not a function`
