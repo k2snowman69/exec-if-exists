@@ -8,16 +8,24 @@ export function execIfExists(args: string[]) {
     return;
   }
 
+  const programName = args[0];
+
   return getBinDirectory()
     .then((binDir) => {
-      const result = programInBin(binDir, args[0]);
+      const result = programInBin(binDir, programName);
       return result;
     })
-    .then(() => {
-      const result = runNpx(args);
-      return result;
+    .then((isFound) => {
+      if (isFound) {
+        const result = runNpx(args);
+        return result;
+      } else {
+        console.log(`not found: ${programName}`);
+        return 0;
+      }
     })
-    .catch(() => {
+    .catch((e) => {
+      console.error(e);
       return 0;
     });
 }
