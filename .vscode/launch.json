@@ -21,14 +21,13 @@
       "type": "node"
     },
     {
-      "args": ["./src/**/*"],
+      "args": ["prettier", "-v"],
       "cwd": "${workspaceRoot}",
       "name": "Debug app",
-      "outFiles": [],
-      "preLaunchTask": "npm: build",
-      "program": "${workspaceRoot}/bin/index",
+      "preLaunchTask": "npm: build:dev",
+      "program": "${workspaceRoot}/dist/cli.js",
       "request": "launch",
-      "runtimeArgs": ["--nolazy"],
+      "skipFiles": ["<node_internals>/**"],
       "sourceMaps": true,
       "type": "node"
     }

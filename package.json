@@ -25,6 +25,7 @@
   "repository": "github:k2snowman69/exec-if-exists",
   "scripts": {
     "build": "tsc",
+    "build:dev": "tsc --sourceMap",
     "clean": "rimraf coverage dist",
     "prepare": "npm run clean && npm run build",
     "start": "node ./dist/cli.js",
