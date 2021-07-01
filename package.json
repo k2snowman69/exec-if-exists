@@ -33,5 +33,5 @@
     "test": "jest",
     "version": "changelog-updater && git add CHANGELOG.md"
   },
-  "version": "3.0.3"
+  "version": "3.0.4-beta.0"
 }
