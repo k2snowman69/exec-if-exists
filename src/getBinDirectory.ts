@@ -18,7 +18,8 @@ export function getBinDirectory() {
           return reject(`Error: npm bin did not return a value`);
         }
 
-        const binPath = stdout.trim();
+        const individualLines = stdout.split("\n");
+        const binPath = individualLines[0].trim();
         return resolve(binPath);
       }
     );

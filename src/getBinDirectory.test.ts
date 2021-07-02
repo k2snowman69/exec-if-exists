@@ -6,7 +6,7 @@ import path from "path";
 jest.mock("child_process");
 const mockedChildProcess = mocked(child_process);
 
-const expectedCommand = "npm ls --parseable exec-if-exists";
+const expectedCommand = "npm bin";
 const expectedkNodeModulesPath = path.join(
   "D:",
   "Projects",
@@ -14,10 +14,6 @@ const expectedkNodeModulesPath = path.join(
   "node_modules"
 );
 const expectedBinPath = path.join(expectedkNodeModulesPath, ".bin");
-const mockExecIfExistsPath = path.join(
-  expectedkNodeModulesPath,
-  "exec-if-exists"
-);
 
 it("Resolves when only one package path is found", async () => {
   mockedChildProcess.exec.mockImplementationOnce((command, b, callback) => {
@@ -25,7 +21,7 @@ it("Resolves when only one package path is found", async () => {
     if (callback == null) {
       throw new Error("Unexpected");
     }
-    callback(null, mockExecIfExistsPath, "");
+    callback(null, expectedBinPath, "");
 
     const io = {
       pipe: () => {},
@@ -37,7 +33,8 @@ it("Resolves when only one package path is found", async () => {
     } as any;
   });
 
-  await expect(getBinDirectory()).resolves.toEqual(expectedBinPath);
+  const binDir = await getBinDirectory();
+  expect(binDir).toEqual(expectedBinPath);
 });
 
 it("Resolves when multiple package path is found", async () => {
@@ -46,7 +43,7 @@ it("Resolves when multiple package path is found", async () => {
     if (callback == null) {
       throw new Error("Unexpected");
     }
-    callback(null, `${mockExecIfExistsPath}\n${mockExecIfExistsPath}`, "");
+    callback(null, `${expectedBinPath}\n${expectedBinPath}`, "");
 
     const io = {
       pipe: () => {},
@@ -58,7 +55,8 @@ it("Resolves when multiple package path is found", async () => {
     } as any;
   });
 
-  await expect(getBinDirectory()).resolves.toEqual(expectedBinPath);
+  const binDir = await getBinDirectory();
+  expect(binDir).toEqual(expectedBinPath);
 });
 
 it("Resolves when multiple packages found with newline at end", async () => {
@@ -67,7 +65,7 @@ it("Resolves when multiple packages found with newline at end", async () => {
     if (callback == null) {
       throw new Error("Unexpected");
     }
-    callback(null, `${mockExecIfExistsPath}\n${mockExecIfExistsPath}\n`, "");
+    callback(null, `${expectedBinPath}\n${expectedBinPath}\n`, "");
 
     const io = {
       pipe: () => {},
@@ -79,7 +77,8 @@ it("Resolves when multiple packages found with newline at end", async () => {
     } as any;
   });
 
-  await expect(getBinDirectory()).resolves.toEqual(expectedBinPath);
+  const binDir = await getBinDirectory();
+  expect(binDir).toEqual(expectedBinPath);
 });
 
 it("Rejects when no paths are found", async () => {
