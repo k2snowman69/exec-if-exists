@@ -31,7 +31,7 @@
     "prepare": "npm run clean && npm run build",
     "start": "node ./dist/cli.js",
     "test": "jest",
-    "version": "changelog-updater && git add CHANGELOG.md"
+    "version": "changelog-updater && git add ."
   },
-  "version": "3.0.3"
+  "version": "3.0.4"
 }
