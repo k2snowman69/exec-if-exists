@@ -8,7 +8,7 @@
     "@snowcoders/renovate-config": "2.0.3",
     "@snowcoders/sortier": "3.3.0",
     "@types/execa": "0.9.0",
-    "@types/jest": "27.4.0",
+    "@types/jest": "27.4.1",
     "@types/node": "17.0.19",
     "changelog-updater": "2.0.2",
     "husky": "5.1.3",
