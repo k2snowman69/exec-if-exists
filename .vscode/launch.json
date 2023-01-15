@@ -4,13 +4,7 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "configurations": [
     {
-      "args": [
-        "--runInBand",
-        "--coverage",
-        "false",
-        "--findRelatedTests",
-        "${relativeFile}"
-      ],
+      "args": ["--runInBand", "--coverage", "false", "--findRelatedTests", "${relativeFile}"],
       "console": "integratedTerminal",
       "cwd": "${workspaceRoot}",
       "internalConsoleOptions": "neverOpen",
@@ -18,16 +12,18 @@
       "program": "${workspaceRoot}/node_modules/jest/bin/jest",
       "request": "launch",
       "sourceMaps": true,
-      "type": "node"
+      "type": "node",
+      "runtimeArgs": ["--experimental-vm-modules"]
     },
     {
-      "args": ["prettier", "-v"],
+      "args": [],
       "cwd": "${workspaceRoot}",
       "name": "Debug app",
-      "preLaunchTask": "npm: build:dev",
-      "program": "${workspaceRoot}/dist/cli.js",
+      "outFiles": [],
+      "preLaunchTask": "npm: build",
+      "program": "${workspaceRoot}/bin/index",
       "request": "launch",
-      "skipFiles": ["<node_internals>/**"],
+      "runtimeArgs": ["--nolazy"],
       "sourceMaps": true,
       "type": "node"
     }

@@ -1,11 +1,9 @@
-.*rc.js
-.circleci
-.gitignore
-.npmignore
-.vscode
-coverage
-jest.config.js
-src
-renovate.json
-tsconfig.base.json
-tsconfig.json
+# Use an allow list system so we don't accidentally publish something we don't mean to
+**
+
+!/bin/**
+!/dist-cjs/**
+!/dist/**
+!/LICENSE
+!/CHANGELOG.md
+!/README.md

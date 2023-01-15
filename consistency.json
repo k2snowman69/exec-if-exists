@@ -1,0 +1,61 @@
+{
+  "base": [
+    {
+      "name": "scaffold-typescript-cli--circleci",
+      "owner": "snowcoders",
+      "platform": "github"
+    }
+  ],
+  "producer": {
+    "ignore": ["src", "*.md", "package-lock.json"],
+    "overrides": [
+      {
+        "actions": [
+          {
+            "selector": "$.dependencies",
+            "mergeOrder": "consumer_producer"
+          },
+          {
+            "selector": "$.devDependencies",
+            "mergeOrder": "consumer_producer"
+          },
+          {
+            "selector": "$.optionalDependencies",
+            "mergeOrder": "consumer_producer"
+          },
+          {
+            "selector": "$.peerDependencies",
+            "mergeOrder": "consumer_producer"
+          },
+          {
+            "selector": "$.scripts",
+            "mergeOrder": "consumer_producer"
+          }
+        ],
+        "filePattern": "package.json",
+        "type": "json"
+      },
+      {
+        "actions": [
+          {
+            "description": "Replace Debug Relative Jest Tests completely",
+            "selector": "$.configurations[?(@.name==\"Debug Relative Jest Tests\")]",
+            "mergeOrder": "producer"
+          },
+          {
+            "description": "Replace Debug app completely",
+            "selector": "$.configurations[?(@.name==\"Debug app\")]",
+            "mergeOrder": "producer"
+          },
+          {
+            "description": "Allows consumers to customize the args section",
+            "selector": "$.configurations[?(@.name==\"Debug app\")].args",
+            "mergeOrder": "consumer"
+          }
+        ],
+        "filePattern": ".vscode/launch.json",
+        "type": "json"
+      }
+    ]
+  }
+}
