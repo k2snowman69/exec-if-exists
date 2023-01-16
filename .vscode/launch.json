@@ -11,9 +11,9 @@
       "name": "Debug Relative Jest Tests",
       "program": "${workspaceRoot}/node_modules/jest/bin/jest",
       "request": "launch",
+      "runtimeArgs": ["--experimental-vm-modules"],
       "sourceMaps": true,
-      "type": "node",
-      "runtimeArgs": ["--experimental-vm-modules"]
+      "type": "node"
     },
     {
       "args": [],
@@ -21,7 +21,7 @@
       "name": "Debug app",
       "outFiles": [],
       "preLaunchTask": "npm: build",
-      "program": "${workspaceRoot}/bin/index",
+      "program": "${workspaceRoot}/dist/cli.js",
       "request": "launch",
       "runtimeArgs": ["--nolazy"],
       "sourceMaps": true,
