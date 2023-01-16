@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Added console output for easier debugging
+
 ## [4.0.0-beta.0] - 2023-01-16
 
 - Completely rewrote the internals - You should see no differences but calling it out just in case
