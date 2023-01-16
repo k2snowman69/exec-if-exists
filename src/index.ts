@@ -16,23 +16,27 @@ function runNpx(args: string[]): Promise<number> {
       {
         cwd: process.cwd(),
       },
-      (error) => {
+      (error, stdio, stderr) => {
+        console.log(stdio);
         if (error == null) {
-          resolve(0);
+          return resolve(0);
         }
         if (error != null && typeof error === "object") {
           if ("message" in error && typeof error.message === "string") {
             const { message } = error;
             const errorString = message.toString();
             if (errorString.includes("npm ERR! code E404")) {
-              resolve(0);
+              console.log(`Package '${args[0]}' not installed, continuing without error`);
+              return resolve(0);
             }
           }
           if ("code" in error && typeof error.code === "number") {
-            resolve(error.code);
+            console.error(stderr);
+            return resolve(error.code);
           }
         }
-        resolve(1);
+        console.error(stderr);
+        return resolve(1);
       }
     );
   });
