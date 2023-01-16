@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Completely rewrote the internals
+- Fixed npm@9 no longer working
+
+**Breaking**
+
+- Dropped node 12 and 14 support
+
 ## [3.0.4] - 2021-07-02
 
 - Improved getBinDirectory performance
