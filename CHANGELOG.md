@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- Added console output for easier debugging
+## [4.0.0-beta.1] - 2023-01-16
+
+- No longer hides underlying commands output unless it results in a E404
 
 ## [4.0.0-beta.0] - 2023-01-16
 
