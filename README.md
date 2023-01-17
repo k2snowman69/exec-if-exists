@@ -1,6 +1,6 @@
 # exec-if-exists
 
-Runs an npm package only if it exists. This is basically chaining `which` and `npx --no` so that when which is unable to find a package, it allows your script to continue without error.
+Runs an npm package only if it exists locally (e.g. in node_modules). This is basically chaining `which` and `npx --no` so that when which is unable to find a package, it allows your script to continue without error.
 
 # Usage
 

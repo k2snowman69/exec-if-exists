@@ -7,7 +7,7 @@ import { execIfExists } from "./index.js";
 let args = process.argv.slice(2);
 if (args.length === 0) {
   console.log("Must provide a program to run (e.g. `exec-if-exist eslint`)");
-  process.exit(0);
+  process.exit(1);
 }
 
 async function run() {
