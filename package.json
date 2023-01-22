@@ -3,6 +3,9 @@
   "bin": {
     "exec-if-exists": "./dist/cli.js"
   },
+  "dependencies": {
+    "find-up": "^6.3.0"
+  },
   "description": "Runs a npm cli package only if it exists",
   "devDependencies": {
     "@release-it/keep-a-changelog": "3.1.0",
