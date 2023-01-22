@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.0.0-beta.2] - 2023-01-22
+
 - Fixed package exists in registry but not on local install
 
 ## [4.0.0-beta.1] - 2023-01-16
