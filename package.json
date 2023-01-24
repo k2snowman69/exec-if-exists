@@ -25,7 +25,7 @@
     "lint-staged": "13.1.0",
     "prettier": "2.8.3",
     "release-it": "15.6.0",
-    "rimraf": "4.1.1",
+    "rimraf": "4.1.2",
     "sortier": "1.0.1",
     "ts-jest": "29.0.5",
     "tslib": "2.4.1",
