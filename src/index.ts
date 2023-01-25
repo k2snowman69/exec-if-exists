@@ -11,7 +11,7 @@ export async function execIfExists(args: string[]): Promise<number> {
 
   const possibleBinDirectories = getBinDirectories();
   if (possibleBinDirectories == null || possibleBinDirectories.length === 0) {
-    console.debug("Unable to find nearest node_modules/.bin directory");
+    console.log("Unable to find nearest node_modules/.bin directory");
     return Promise.resolve(1);
   }
 
@@ -20,7 +20,7 @@ export async function execIfExists(args: string[]): Promise<number> {
   const programExists = results.some((value) => value);
 
   if (!programExists) {
-    console.debug(`Package '${args[0]}' not installed, continuing without error`);
+    console.log(`Package '${args[0]}' not installed, continuing without error`);
     return Promise.resolve(0);
   }
 
