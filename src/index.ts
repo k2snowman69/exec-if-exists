@@ -6,12 +6,13 @@ import { programInBin } from "./programInBin.js";
 
 export async function execIfExists(args: string[]): Promise<number> {
   if (!Array.isArray(args) || args.length === 0 || args.some((value) => typeof value !== "string")) {
-    return Promise.reject('String array expected as arguments. E.g. ["eslint", "--fix"]');
+    console.error('String array expected as arguments. E.g. ["eslint", "--fix"]');
+    return Promise.resolve(1);
   }
 
   const possibleBinDirectories = getBinDirectories();
   if (possibleBinDirectories == null || possibleBinDirectories.length === 0) {
-    console.log("Unable to find nearest node_modules/.bin directory");
+    console.error("Unable to find nearest node_modules/.bin directory");
     return Promise.resolve(1);
   }
 

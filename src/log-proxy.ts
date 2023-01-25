@@ -10,6 +10,7 @@ const currentLogLevel = funcToLevel.get(console.log);
 
 export const log = out(console.log);
 export const debug = out(console.debug);
+export const error = out(console.error);
 
 function out<T extends typeof console.log>(func: T) {
   const levelForFunc = funcToLevel.get(func);
