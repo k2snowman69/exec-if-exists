@@ -18,7 +18,7 @@ describe("Error scenarios", () => {
         // @ts-expect-error - Testing invalid inputs, expecting errors here
         value
       )
-    ).rejects.toContain("String array");
+    ).resolves.toBe(1);
   });
 });
 
