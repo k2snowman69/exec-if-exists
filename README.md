@@ -1,34 +1,48 @@
 # exec-if-exists
 
-Runs an npm package only if it exists locally (e.g. in node_modules). This is basically chaining `which` and `npx --no` so that when which is unable to find a package, it allows your script to continue without error.
+Runs an npm package (e.g. `npm exec`) only if it exists locally (e.g. in node_modules). The default `npx` command will run packages found both locally and globally and if the package doesn't exist throw an error.
 
 # Usage
 
-```
+```shell
 exec-if-exists sortier ./src/**/*.ts
 ```
 
 # Why?
 
-Optional dev tooling
+Maintaining a shared config but allowing opt-in dev tooling. Take the following example lint-staged config:
 
-Let's say some projects use jest for unit testing but others optionally have puppeteer/playwright for E2E testing. Using exec-if-exists your lint-stage config basically runs both and if the tool is installed, it gets run.
-
-```
-// Example husky config
+```javascript
+// Example lint-staged config
 {
-  hooks: {
-    "pre-commit": "exec-if-exists jest && exec-if-exists playwright",
-  },
-};
+  // Javascript based source code files
+  "**/*.@(?([cm])[jt]s)?(x)": [
+      // Required tooling
+      "eslint --fix",
+      "prettier --write --ignore-unknown",
+
+      // Recommended tooling
+      "exec-if-exists sortier --ignore-unknown"
+  ]
+}
 ```
 
-Now any time a commit is pushed, jest and playwright run if they are installed and exit with a non-zero if they fail. This allows you to create a single consistent config that all your projects inherit from. For example, our husky config looks like this:
+Now any time a commit is pushed:
 
+1. eslint and prettier will run and if they are not installed the commit will fail
+1. sortier, because it's running through exec-if-exists, on the other hand is optional, and only runs if it's installed allowing some flexibility to the consumers of the shared config
+
+The benefit is you can document in a single location
+
+- optional tooling you maybe testing to making required in the future
+- optional tooling that people have suggested that may benefit others
+
+Either way it allows easy opt-in to tooling without having to change a shared configuration file.
+
+Finally, you can now use that shared config:
+
+```javascript
+const configs = require("@snowcoders/renovate-config");
+
+module.exports = configs.lintStaged;
 ```
-var configs = require("@snowcoders/renovate-config");
-
-module.exports = configs.husky;
-```
-
-And then we host our shared husky config in a single location!

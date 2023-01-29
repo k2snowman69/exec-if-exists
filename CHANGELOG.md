@@ -7,19 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [4.0.0-beta.3] - 2023-01-26
-
-- Fixed program no longer outputs message when program not found
-
-## [4.0.0-beta.2] - 2023-01-22
-
-- Fixed package exists in registry but not on local install
-
-## [4.0.0-beta.1] - 2023-01-16
-
-- No longer hides underlying commands output unless it results in a E404
-
-## [4.0.0-beta.0] - 2023-01-16
+## [4.0.0] - 2023-01-29
 
 - Completely rewrote the internals - You should see no differences but calling it out just in case
 - Fixed npm@9 no longer working
